@@ -1,12 +1,28 @@
-﻿// Day 1
-
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+using AdventOfCode2024;
 using AdventOfCode2024.Days;
+using Microsoft.Extensions.DependencyInjection;
+using DotNetEnv;
 
-var day1 = new Day1();
-var day2 = new Day2();
+Env.Load();
 
-day1.Part1();
-day1.Part2();
+var serviceCollection = new ServiceCollection();
 
-day2.Part1();
-day2.Part2();
+serviceCollection.AddHttpClient();
+serviceCollection.AddScoped<InputAgent>();
+
+var serviceProvider = serviceCollection.BuildServiceProvider();
+
+
+// Use reflection to get all classes implementing IDay, Expect them to have the name Day<num> where num is a 1 or two digit number. Sort by the numeric value of that number. Then run Part1 and Part2 in order
+var days = Assembly.GetExecutingAssembly().GetTypes()
+    .Where(t => t.GetInterfaces().Contains(typeof(IDay)))
+    .OrderBy(t => int.Parse(Regex.Match(t.Name, @"\d+").Value))
+    .Select(t => ActivatorUtilities.CreateInstance(serviceProvider, t) as IDay);
+
+foreach (var day in days)
+{
+    await day.Part1();
+    await day.Part2();
+}

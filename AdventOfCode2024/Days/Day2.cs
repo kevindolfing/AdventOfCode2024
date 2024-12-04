@@ -1,15 +1,15 @@
 ﻿namespace AdventOfCode2024.Days;
 
-public class Day2 : IDay
+public class Day2(InputAgent agent) : IDay
 {
     /// <summary>
     /// A report is safe if:
     /// The levels are either all increasing or all decreasing.
     /// Any two adjacent levels differ by at least one and at most three.
     /// </summary>
-    public void Part1()
+    public async Task Part1()
     {
-        var fileContents = File.ReadAllLines("Inputs/2-1.txt");
+        var fileContents = await agent.GetInputLines(2);
 
         List<List<int>> reports = [];
         foreach (string line in fileContents)
@@ -24,7 +24,7 @@ public class Day2 : IDay
             validReportCount += isValid ? 1 : 0;
         }
 
-        Console.WriteLine($"Day 2 Part 1: {validReportCount}");
+        ResultPrinter.Print(2, 1, validReportCount);
     }
 
     public bool ReportIsInOrder(List<int> report)
@@ -72,9 +72,9 @@ public class Day2 : IDay
         return true;
     }
 
-    public void Part2()
+    public async Task Part2()
     {
-        var fileContents = File.ReadAllLines("Inputs/2-1.txt");
+        var fileContents = await agent.GetInputLines(2);
 
         List<List<int>> reports = [];
         foreach (string line in fileContents)
@@ -89,7 +89,7 @@ public class Day2 : IDay
             validReportCount += isValid ? 1 : 0;
         }
 
-        Console.WriteLine($"Day 2 Part 2: {validReportCount}");
+        ResultPrinter.Print(2, 2, validReportCount);
     }
 
     public bool ReportIsInOrder_2(List<int> report)
@@ -98,25 +98,10 @@ public class Day2 : IDay
         for (int i = 0; i < report.Count; i++)
         {
             var subReport = report.Slice(0, i);
-            if(i != report.Count - 1) subReport.AddRange(report.Slice(i + 1, report.Count - i - 1));
+            if (i != report.Count - 1) subReport.AddRange(report.Slice(i + 1, report.Count - i - 1));
             if (ReportDiffsWithin1And3(subReport) && ReportIsInOrder(subReport)) return true;
-            
         }
 
         return false;
-        // int errors = 0;
-        // List<int> diffs = [];
-        // for (int i = 0; i < report.Count - 1; i++)
-        // {
-        //     diffs.Add(report[i + 1] - report[i]);
-        // }
-        //
-        // errors += diffs.Select(d => Math.Abs(d)).Count(d => d is < 1 or > 3);
-        // if (errors == 1) errors = 0;
-        // var ctz = diffs.Select(d => d > 0 ? 1 : d < 0 ? -1 : 0);
-        // var mostOccurringValue = ctz.GroupBy(d => d).OrderByDescending(g => g.Key).First().First();
-        // errors += ctz.Count(v => v != mostOccurringValue);
-        //
-        // return errors;
     }
 }

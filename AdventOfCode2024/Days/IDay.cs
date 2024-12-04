@@ -2,6 +2,6 @@
 
 public interface IDay
 {
-    void Part1();
-    void Part2();
+    Task Part1();
+    Task Part2();
 }

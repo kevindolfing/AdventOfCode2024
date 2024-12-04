@@ -1,10 +1,10 @@
 ﻿namespace AdventOfCode2024.Days;
 
-public class Day1: IDay
+public class Day1(InputAgent agent) : IDay
 {
-    public void Part1()
+    public async Task Part1()
     {
-        string[] fileContent = File.ReadAllLines("Inputs/1-1.txt");
+        List<string> fileContent =  await agent.GetInputLines(1);
         List<int> diffs = [];
         List<int> left = [];
         List<int> right = [];
@@ -14,7 +14,7 @@ public class Day1: IDay
             left.Add(int.Parse(parts[0]));
             right.Add(int.Parse(parts[1]));
         }
-        
+
         left.Sort();
         right.Sort();
 
@@ -27,20 +27,20 @@ public class Day1: IDay
         {
             int leftItem = left[i];
             int rightItem = right[i];
-            
+
             diffs.Add(Math.Abs(leftItem - rightItem));
         }
-        
-        Console.WriteLine($"Day 1 Part 1: {diffs.Sum()}");
+
+        ResultPrinter.Print(1, 1, diffs.Sum());
     }
 
-    public void Part2()
+    public async Task Part2()
     {
-        string fileContent = File.ReadAllText("Inputs/1-1.txt");
+        List<string> fileContent = await agent.GetInputLines(1);
         long sum = 0;
         List<int> left = [];
         List<int> right = [];
-        foreach (string line in fileContent.Split(Environment.NewLine))
+        foreach (string line in fileContent)
         {
             string[] parts = line.Split("   ");
             left.Add(int.Parse(parts[0]));
@@ -52,9 +52,8 @@ public class Day1: IDay
             IEnumerable<int> rightItems = right.Where(r => r == leftItem);
             sum += leftItem * rightItems.Count();
         }
-        
-        Console.WriteLine($"Day 1 Part 2: {sum}");
+
+
+        ResultPrinter.Print(1, 2, sum);
     }
-    
-    
 }
