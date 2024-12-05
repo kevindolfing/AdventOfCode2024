@@ -8,8 +8,15 @@ public class InputAgent
     public InputAgent(HttpClient httpClient)
     {
         _httpClient = httpClient;
+
+        var session = Environment.GetEnvironmentVariable("AOC_SESSION_TOKEN");
         
-        _httpClient.DefaultRequestHeaders.Add("Cookie", $"session={Environment.GetEnvironmentVariable("AOC_SESSION_TOKEN")}");
+        if(string.IsNullOrWhiteSpace(session))
+        {
+            throw new Exception("AOC_SESSION_TOKEN is not set");
+        }
+        
+        _httpClient.DefaultRequestHeaders.Add("Cookie", $"session={session}");
         
         _inputDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Input"));
         if (!_inputDirectory.Exists)
