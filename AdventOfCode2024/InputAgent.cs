@@ -53,6 +53,6 @@ public class InputAgent
     public async Task<List<string>> GetInputLines(int day)
     {
         var input = await GetInput(day);
-        return input.Split("\n").Where(i => !string.IsNullOrWhiteSpace(i)).ToList();
+        return input[..^1].Split("\n").ToList();
     }
 }
