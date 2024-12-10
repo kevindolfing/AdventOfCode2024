@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2024.Days;
 
-public class Day6(InputAgent agent) : IDay
+public class Day6(IInputAgent agent, IResultPrinter resultPrinter) : IDay
 {
     public async Task Part1()
     {
@@ -14,7 +14,7 @@ public class Day6(InputAgent agent) : IDay
 
         var visitedCount = map.Tiles.Sum(r => r.Count(t => t.Visited));
 
-        ResultPrinter.Print(6, 1, visitedCount);
+        resultPrinter.Print(6, 1, visitedCount);
     }
 
     private static void SimulateGuard(Map map)
@@ -173,7 +173,7 @@ public class Day6(InputAgent agent) : IDay
             }
         }
 
-        ResultPrinter.Print(6, 2, sum);
+        resultPrinter.Print(6, 2, sum);
     }
 
     private static bool GuardIsLooping(Map map)

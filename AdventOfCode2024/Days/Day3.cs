@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2024.Days;
 
-public partial class Day3(InputAgent inputAgent) : IDay
+public partial class Day3(IInputAgent inputAgent, IResultPrinter resultPrinter) : IDay
 {
     public async Task Part1()
     {
@@ -14,7 +14,7 @@ public partial class Day3(InputAgent inputAgent) : IDay
 
         int result = matches.Sum(match => int.Parse(match.Groups[1].Value) * int.Parse(match.Groups[2].Value));
 
-        ResultPrinter.Print(3, 1, result);
+        resultPrinter.Print(3, 1, result);
     }
 
     public async Task Part2()
@@ -43,7 +43,7 @@ public partial class Day3(InputAgent inputAgent) : IDay
             }
         }
 
-        ResultPrinter.Print(3, 2, result);
+        resultPrinter.Print(3, 2, result);
     }
 
     [GeneratedRegex(@"mul\((\d+),(\d+)\)")]

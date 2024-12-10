@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2024.Days;
 
-public class Day7(InputAgent agent) : IDay
+public class Day7(IInputAgent agent, IResultPrinter resultPrinter) : IDay
 {
     public async Task Part1()
     {
@@ -14,7 +14,7 @@ public class Day7(InputAgent agent) : IDay
             totalSum += CheckLine(line);
         }
 
-        ResultPrinter.Print(7, 1, totalSum);
+        resultPrinter.Print(7, 1, totalSum);
     }
 
     /// <example>
@@ -98,7 +98,7 @@ public class Day7(InputAgent agent) : IDay
             totalSum += result;
         }
 
-        ResultPrinter.Print(7, 2, totalSum);
+        resultPrinter.Print(7, 2, totalSum);
     }
 
     private static long CheckLine_Part2(string line)

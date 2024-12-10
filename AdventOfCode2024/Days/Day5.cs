@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode2024.Days;
 
-public class Day5(InputAgent agent) : IDay
+public class Day5(IInputAgent agent, IResultPrinter resultPrinter) : IDay
 {
     public async Task Part1()
     {
@@ -28,7 +28,7 @@ public class Day5(InputAgent agent) : IDay
             }
         }
 
-        ResultPrinter.Print(5, 1, sum);
+        resultPrinter.Print(5, 1, sum);
     }
 
     private static bool ValidateRulesForUpdate(List<Tuple<int, int>> rules, List<int> updateParts)
@@ -97,6 +97,6 @@ public class Day5(InputAgent agent) : IDay
         }
         
         var sum = validParts.Sum(it => it[it.Count / 2]);
-        ResultPrinter.Print(5, 2, sum);
+        resultPrinter.Print(5, 2, sum);
     }
 }

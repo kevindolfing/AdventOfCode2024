@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode2024.Days;
 
-public class Day9(InputAgent agent) : IDay
+public class Day9(IInputAgent agent, IResultPrinter resultPrinter) : IDay
 {
     public async Task Part1()
     {
@@ -48,7 +48,7 @@ public class Day9(InputAgent agent) : IDay
             sum += i * fileSystem[i].Value;
         }
 
-        ResultPrinter.Print(9, 1, sum);
+        resultPrinter.Print(9, 1, sum);
     }
 
     public async Task Part2()
@@ -128,6 +128,6 @@ public class Day9(InputAgent agent) : IDay
             sum += i * fileSystem[i].Value;
         }
 
-        ResultPrinter.Print(9, 2, sum);
+        resultPrinter.Print(9, 2, sum);
     }
 }  

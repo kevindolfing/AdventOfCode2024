@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode2024.Days;
 
-public class Day4(InputAgent agent) : IDay
+public class Day4(IInputAgent agent, IResultPrinter resultPrinter) : IDay
 {
     private static char[] Xmas = ['X', 'M', 'A', 'S'];
 
@@ -59,7 +59,7 @@ public class Day4(InputAgent agent) : IDay
             }
         }
 
-        ResultPrinter.Print(4, 1, xmasCount);
+        resultPrinter.Print(4, 1, xmasCount);
     }
 
     public async Task Part2()
@@ -86,7 +86,7 @@ public class Day4(InputAgent agent) : IDay
             }
         }
 
-        ResultPrinter.Print(4, 2, xmasCount);
+        resultPrinter.Print(4, 2, xmasCount);
     }
 
     private static readonly Direction[][] directions_Part2 =

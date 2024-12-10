@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode2024.Days;
 
-public class Day2(InputAgent agent) : IDay
+public class Day2(IInputAgent agent, IResultPrinter resultPrinter) : IDay
 {
     /// <summary>
     /// A report is safe if:
@@ -24,7 +24,7 @@ public class Day2(InputAgent agent) : IDay
             validReportCount += isValid ? 1 : 0;
         }
 
-        ResultPrinter.Print(2, 1, validReportCount);
+        resultPrinter.Print(2, 1, validReportCount);
     }
 
     public bool ReportIsInOrder(List<int> report)
@@ -89,7 +89,7 @@ public class Day2(InputAgent agent) : IDay
             validReportCount += isValid ? 1 : 0;
         }
 
-        ResultPrinter.Print(2, 2, validReportCount);
+        resultPrinter.Print(2, 2, validReportCount);
     }
 
     public bool ReportIsInOrder_2(List<int> report)

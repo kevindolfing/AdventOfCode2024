@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode2024;
 
-public class InputAgent
+public class InputAgent : IInputAgent
 {
     private readonly HttpClient _httpClient;
     private readonly DirectoryInfo _inputDirectory;
@@ -32,7 +32,7 @@ public class InputAgent
         
         if (dayFile.Exists)
         {
-            Console.WriteLine($"Reading input for day {day} from file");
+            // Console.WriteLine($"Reading input for day {day} from file");
             return await File.ReadAllTextAsync(dayFile.FullName);
         }
         
@@ -43,7 +43,7 @@ public class InputAgent
         var input = await response.Content.ReadAsStringAsync();
         
         
-        Console.WriteLine($"Writing input for day {day} to file");
+        // Console.WriteLine($"Writing input for day {day} to file");
         
         await File.WriteAllTextAsync(dayFile.FullName, input);
         

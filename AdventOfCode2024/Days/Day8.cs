@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2024.Days;
 
-public class Day8(InputAgent agent) : IDay
+public class Day8(IInputAgent agent, IResultPrinter resultPrinter) : IDay
 {
     public async Task Part1()
     {
@@ -69,7 +69,7 @@ public class Day8(InputAgent agent) : IDay
             }
         }
 
-        ResultPrinter.Print(8, 1, positions.Count);
+        resultPrinter.Print(8, 1, positions.Count);
     }
 
     private class Antenna
